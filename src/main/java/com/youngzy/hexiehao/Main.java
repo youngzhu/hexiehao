@@ -41,7 +41,13 @@ public class Main {
     }
 
     private static void pick() {
+//        driver.get("https://kyfw.12306.cn/otn/view/index.html");
+
+        WebElement chepiao = driver.findElement(By.linkText("车票"));
+        chepiao.click();
+
         WebElement dc = driver.findElement(By.linkText("单程"));
+//        WebElement dc = driver.findElement(By.className("nav_dan"));
         dc.click();
     }
 
@@ -51,6 +57,9 @@ public class Main {
 
         String key1 = System.getenv("12306_USERNAME");
         String key2 = System.getenv("12306_PASSWORD");
+        if (key1 == null || key2 == null) {
+            throw new RuntimeException("环境变量中未设置账号密码！");
+        }
 
         // 找到相关的页面元素并进行模拟登录
         WebElement usernameInput = driver.findElement(By.id("J-userName"));

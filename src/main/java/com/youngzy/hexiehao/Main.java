@@ -41,14 +41,17 @@ public class Main {
     }
 
     private static void pick() {
-//        driver.get("https://kyfw.12306.cn/otn/view/index.html");
+        driver.get("https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc");
 
+        /*
         WebElement chepiao = driver.findElement(By.linkText("车票"));
         chepiao.click();
 
         WebElement dc = driver.findElement(By.linkText("单程"));
 //        WebElement dc = driver.findElement(By.className("nav_dan"));
         dc.click();
+
+         */
     }
 
     private static void login() {
@@ -73,7 +76,8 @@ public class Main {
         // 短信验证
         // 手动操作
 
-        //
+        // 等待上面的输入及跳转
+        // 页面出现了“退出”就说明登录（跳转）成功了
         new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(60))
                 .ignoring(NoSuchElementException.class)

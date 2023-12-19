@@ -17,7 +17,8 @@ public class Main {
 
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
-        driver.getTitle();
+        String title = driver.getTitle();
+        System.out.println("Title:" + title);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
@@ -29,7 +30,7 @@ public class Main {
 
         WebElement message = driver.findElement(By.id("message"));
         String text = message.getText();
-        System.out.println(text);
+        System.out.println("Message:" + text);
 
 //        driver.quit();
     }

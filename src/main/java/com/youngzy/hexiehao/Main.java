@@ -1,9 +1,6 @@
 package com.youngzy.hexiehao;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -21,7 +18,7 @@ public class Main {
         driver = new ChromeDriver();
 
         // 登录
-        login();
+//        login();
         
         // 选票
         pick();
@@ -42,6 +39,37 @@ public class Main {
 
     private static void pick() {
         driver.get("https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc");
+
+        String fromStation = "上海";
+        String toStation = "南京南";
+
+        // 出发地
+        WebElement fromInput = driver.findElement(By.id("fromStationText"));
+        fromInput.clear();
+        // 关闭（隐藏）选择车站下拉框
+//        WebElement choiceDiv = driver.findElement(By.id("internalBox"));
+//        choiceDiv.fin
+        fromInput.sendKeys(fromStation);
+
+        // 目的地
+        WebElement toInput = driver.findElement(By.id("toStationText"));
+        toInput.clear();
+        toInput.sendKeys(toStation);
+
+        // hidden
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        String js1 = "document.getElementById('fromStation').value='" + fromStation + "';";
+        String js2 = "document.getElementById('toStation').value='" + toStation + "';";
+        jsExecutor.executeScript(js1+js2);
+
+        // 出发日
+        WebElement trainDateInput = driver.findElement(By.id("train_date"));
+        trainDateInput.clear();
+        trainDateInput.sendKeys("2023-12-25");
+
+        // 查询
+        WebElement queryButton = driver.findElement(By.id("query_ticket"));
+        queryButton.click();
 
         /*
         WebElement chepiao = driver.findElement(By.linkText("车票"));
